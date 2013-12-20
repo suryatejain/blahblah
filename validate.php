@@ -36,13 +36,7 @@ include 'sidebar.php';
 include 'opcfunctions.php';
 $user = $_SESSION['user'];
 
-if(isset($_REQUEST['approve'])) {
-	$sql = "UPDATE questionbank set statusid = 3 where id = ".$_REQUEST['questionbankid'];
-	if(mysql_query($sql))
-	{
-	 header("Location: approve.php");
-	}
-	}
+
 $abc = 0;
 if(isset($_REQUEST['ques'])) {
 	$ab = 'q'.$_REQUEST['questionbankid'];
@@ -57,17 +51,21 @@ while ($row = mysql_fetch_array($result))
 	echo "<div1>";
 	echo "<form action='#' method='post'>";
 	echo "<input type='hidden' name='questionbankid' value='".$_REQUEST['questionbankid']."'";
-	echo questionhtml($row['id'],0,1);
+	if($abc){
+	
+	echo questionhtml($row['id'],1,0);
+	}
+	else{
+	echo questionhtml($row['id'],0,0);
+	}
 	
 		if($abc) {
-		echo "<br><form style='display:inline;' action='#' method='post'><input type='hidden' name='questionbankid' value='".$_REQUEST['questionbankid']."'>
-<input type='hidden' name='approve' value=1>
-<input style='background-color:lightgreen' type='submit' value='Validate and Approve'></form>";
+		echo "<br> Correct Answer !! Well Done.";
 	}
 	else {
 	echo "<br><input type='submit' value='Check Answer'>";
 	if(isset($_REQUEST['ques'])) {
-	echo "Incorrect Question";
+	echo " . Na Na Na Wrong Answer. Try again.";
 	}
 	}
 echo "</form>";

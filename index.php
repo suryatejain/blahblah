@@ -38,6 +38,7 @@ echo '<div style="top:0px;right:25px;position: fixed;">
 <br>
 <a href="create.php">add a new question</a><br>
 <a href="approve.php">approve the questions</a><br>
+<a href ="approvedquestions.php">approved questions</a><br>
 <a href ="myques.php">my questions</a><br>
 <h3> under development links .. </h3>
 <a href="#">user profile</a><br>

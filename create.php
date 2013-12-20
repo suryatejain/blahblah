@@ -1,6 +1,7 @@
 <?php
 error_reporting(0);
 session_start();
+
 #echo json_encode($_REQUEST);
 if(!isset($_SESSION['user']))
 {
@@ -13,7 +14,8 @@ if(isset($_POST['logout'])){
 echo '<div style="top:0px;right:25px;position: fixed;">
 	<form action="index.php" method="post"><input type="hidden" name="logout" value=1><input type="submit" value="logout"></form>
 </div>';
-echo "hello ".$_SESSION['user']." <a href='index.php'>home</a><br>";
+echo "hello ".$_SESSION['user']." <a href='index.php'>home</a><br><br>";
+include 'sidebar.php';
 
 ?>
 <html>

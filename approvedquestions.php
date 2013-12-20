@@ -1,6 +1,7 @@
 <?php
 error_reporting(0);
 session_start();
+
 #echo json_encode($_REQUEST);
 if(!isset($_SESSION['user']))
 {
@@ -14,20 +15,17 @@ echo '<div style="top:0px;right:25px;position: fixed;">
 	<form action="index.php" method="post"><input type="hidden" name="logout" value=1><input type="submit" value="logout"></form>
 </div>';
 echo "hello ".$_SESSION['user']." <a href='index.php'>home</a><br><br>";
-include 'sidebar.php';
+
 include 'mydb.php';
 include 'opcfunctions.php';
-
+include 'sidebar.php';
 $user = $_SESSION['user'];
 
-$sql = "select * from questionbank where statusid in (1,2,4)";
+$sql = "select * from questionbank where statusid in (3)";
 $result = mysql_query($sql);
 $k = 1;
 while ($row = mysql_fetch_array($result))
-	{
+{
 echo questionhtml($row['id'],1,1);
-echo "<form style='display:inline;' action='approvequestion.php' method='post'><input type='hidden' name='questionbankid' value='".$row['id']."'>
-<input type='submit' value='Validate and Approve'></form>";
-
-$k++;	
+$k++;
 }

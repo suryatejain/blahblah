@@ -13,9 +13,10 @@ if(isset($_POST['logout'])){
 echo '<div style="top:0px;right:25px;position: fixed;">
 	<form action="index.php" method="post"><input type="hidden" name="logout" value=1><input type="submit" value="logout"></form>
 </div>';
-echo "hello ".$_SESSION['user']." <a href='index.php'>home</a><br><br><br>";
+echo "hello ".$_SESSION['user']." <a href='index.php'>home</a><br><br>";
 
 include 'mydb.php';
+include 'sidebar.php';
 $user = $_SESSION['user'];
 
 $sql = "select * from questionbank where createdby like '$user'";
@@ -86,8 +87,8 @@ foreach($options->{'options'} as $o) {
 echo "Answer : options - ".$f." i.e ".$fin;	
 
 }
-echo "<br>Complexity - ".$complexity."<hr>";
-
+echo "<br>Complexity - ".$complexity;
+echo "<br><a href='validate.php?questionbankid=".$row['id']."'>Validate Question</a><hr>";
 
 $k++;	
 }

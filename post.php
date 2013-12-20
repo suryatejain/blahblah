@@ -143,6 +143,7 @@ VALUES('',$questiontypeid,$banktypeid,'$question','$optionjson','$answerjson',$c
 
 if(mysql_query($sql)){
 	echo "<br>The question has succesfully been added to the question bank. Await approval.";
+	echo "<br><a href='validate.php?questionbankid=".mysql_insert_id()."'>Validate Question</a><br>";
 	}
 }
 ?>

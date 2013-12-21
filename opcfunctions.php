@@ -4,7 +4,7 @@ include 'mydb.php';
 
 
 function iscorrectanswer($qid,$ans) {
-
+	
 	$sql = "select * from questionbank where id = ".$qid ;
 	$result = mysql_query($sql);
 	while ($row = mysql_fetch_array($result))
@@ -25,7 +25,7 @@ function questionhtml($qid,$answeryn,$qdetailsyn) {
 	$result = mysql_query($sql);
 	while ($row = mysql_fetch_array($result))
 	{
-		$question = $row['question'];
+		$question = stripslashes($row['question']);
 		$questiontypeid = $row['questiontypeid'];
 		$answer = $row['answer'];
 		$answerkey = $row['answerkey'];

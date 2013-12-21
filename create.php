@@ -1,28 +1,13 @@
 <?php
 error_reporting(0);
-session_start();
-
-#echo json_encode($_REQUEST);
-if(!isset($_SESSION['user']))
-{
-	die("You have not logged in.");
-}
-if(isset($_POST['logout'])){
-	unset($_SESSION['user']);
-	session_destroy();
-}
-echo '<div style="top:0px;right:25px;position: fixed;">
-	<form action="index.php" method="post"><input type="hidden" name="logout" value=1><input type="submit" value="logout"></form>
-</div>';
-echo "hello ".$_SESSION['user']." <a href='index.php'>home</a><br><br>";
+include 'session.php';
 include 'sidebar.php';
-
 ?>
 <html>
 <title>OPC</title>
 <head>
 <style>
-	textarea#styleid1{
+textarea#styleid1{
 color:#666;
 font-size:14px;
 -moz-border-radius: 8px; -webkit-border-radius: 8px;
@@ -38,81 +23,76 @@ transition: all 0.25s ease-in-out;
 box-shadow: 0 0 5px rgba(81, 203, 238, 0);
 -webkit-box-shadow: 0 0 5px rgba(81, 203, 238, 0);
 -moz-box-shadow: 0 0 5px rgba(81, 203, 238, 0);
-} - See more at: http://www.prettyklicks.com/blog/textarea-animated-glow-like-on-twitter-using-css3/#sthash.woq3evpN.dpuf
-	</style>
+}
+</style>
 <script>
 
 var fieldnumber = 2;
 var activefield = "text";
 
 function addOption(q) { 
-		var fname = q + "answer";
-	    var fnum = fieldnumber + 1 ;
-		var theForm = document.getElementById(fname); 
-		var newOption = document.createElement("input"); 
-		newOption.name = fname + '[]'; // poll[optionX]
-		if(q == 'radio')
-		{
+	var fname = q + "answer";
+	var fnum = fieldnumber + 1 ;
+	var theForm = document.getElementById(fname); 
+	var newOption = document.createElement("input"); 
+	newOption.name = fname + '[]'; // poll[optionX]
+	if(q == 'radio')
+	{
 		newOption.name = fname;
-		}
-		newOption.type = q;
-		if(q != 'text')
-		{
+	}
+	newOption.type = q;
+	if(q != 'text')
+	{
 		newOption.value = q + fnum;
-		}
-		theForm.appendChild(newOption); 
-
-		if(q != 'text')
-		{
+	}
+	theForm.appendChild(newOption); 
+	if(q != 'text')
+	{
 		var newOption1 = document.createElement("input"); 
 		newOption1.type = 'text';
 		newOption1.name = q + fnum;
-
 		theForm.appendChild(newOption1); 
-		}
-		var mybr = document.createElement('br');
-		theForm.appendChild(mybr);
-		fieldnumber++
-
-
+	}
+	var mybr = document.createElement('br');
+	theForm.appendChild(mybr);
+	fieldnumber++
 }
 function hidedivs(p) {
 	document.getElementById('addfield').style.display = "block";
-if(p==0) {
-activefield = "";
-document.getElementById('textanswer').style.display = "none";
-document.getElementById('radioanswer').style.display = "none";
-document.getElementById('checkboxanswer').style.display = "none";
-}
+	if(p==0) {
+		activefield = "";
+		document.getElementById('textanswer').style.display = "none";
+		document.getElementById('radioanswer').style.display = "none";
+		document.getElementById('checkboxanswer').style.display = "none";
+	}
 	
-if(p==3) {
-activefield = "text";
-document.getElementById('textanswer').style.display = "block";
-document.getElementById('radioanswer').style.display = "none";
-document.getElementById('checkboxanswer').style.display = "none";
-}
+	if(p==3) {
+		activefield = "text";
+		document.getElementById('textanswer').style.display = "block";
+		document.getElementById('radioanswer').style.display = "none";
+		document.getElementById('checkboxanswer').style.display = "none";
+	}
 
-if(p==1) {
-	activefield = "radio";
-document.getElementById('textanswer').style.display = "none";
-document.getElementById('radioanswer').style.display = "block";
-document.getElementById('checkboxanswer').style.display = "none";
-}
+	if(p==1) {
+		activefield = "radio";
+		document.getElementById('textanswer').style.display = "none";
+		document.getElementById('radioanswer').style.display = "block";
+	document.getElementById('checkboxanswer').style.display = "none";
+	}
 
-if(p==2) {
-	activefield = "checkbox";
-document.getElementById('textanswer').style.display = "none";
-document.getElementById('radioanswer').style.display = "none";
-document.getElementById('checkboxanswer').style.display = "block";
-}
-
+	if(p==2) {
+		activefield = "checkbox";
+		document.getElementById('textanswer').style.display = "none";
+		document.getElementById('radioanswer').style.display = "none";
+		document.getElementById('checkboxanswer').style.display = "block";
+	}
 }
 </script>
 </head>
 <body>
 
 <form name="xform" action="post.php" method="POST">
-	<table>
+<table>
 <tr>
 <td>Enter your Question : </td><td><textarea id="styleid1" name="question"></textarea></td></tr>
 <tr><td>Question Type : </td><td><select name="questiontypeid" onchange="hidedivs(this.value);">
@@ -168,6 +148,3 @@ Type of Question</td><td>
 </form>
 </body>
 </html>
-
-
-
